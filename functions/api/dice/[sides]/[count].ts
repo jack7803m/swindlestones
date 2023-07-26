@@ -6,6 +6,7 @@ import privatekey from '../../../../keys/private.txt';
 // the request count, sides, and request time, and result array are signed with the private key
 // the client can verify the signature with the public key 
 export const onRequestGet: PagesFunction<unknown> = async (context) => {
+    // time the function execution
     const sides: number = parseInt(context.params.sides as string);
     const count: number = parseInt(context.params.count as string);
 
@@ -33,11 +34,10 @@ export const onRequestGet: PagesFunction<unknown> = async (context) => {
 };
 
 // sign the result with the private key
-async function sign(result: any): Promise<string> {
+async function sign(result: unknown): Promise<string> {
 
     // parse private key as JWK
     const jwk = JSON.parse(privatekey);
-    console.log(jwk)
 
     // import the private key
     const key = await crypto.subtle.importKey(

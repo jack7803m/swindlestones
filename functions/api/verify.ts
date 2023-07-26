@@ -20,7 +20,6 @@ async function verify(result: any, signature: string): Promise<boolean> {
 
     // parse private key as JWK
     const jwk = JSON.parse(publickey);
-    console.log(jwk)
 
     // import the public key
     const key = await crypto.subtle.importKey(
