@@ -1,5 +1,5 @@
 // @ts-expect-error - this is a nonstandard import for cloudflare functions
-import privatekey from '../../../../keys/private.txt';
+import * as privatekey from '../../../../keys/private.json';
 
 // "Rolls dice" with the specified number of sides
 // Returns the array of dice rolls plus a digital signature
@@ -36,13 +36,10 @@ export const onRequestGet: PagesFunction<unknown> = async (context) => {
 // sign the result with the private key
 async function sign(result: unknown): Promise<string> {
 
-    // parse private key as JWK
-    const jwk = JSON.parse(privatekey);
-
     // import the private key
     const key = await crypto.subtle.importKey(
         'jwk',
-        jwk,
+        privatekey,
         { name: 'ECDSA', namedCurve: 'P-384' },
         true,
         ['sign']);

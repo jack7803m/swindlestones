@@ -1,5 +1,5 @@
 // @ts-expect-error - this is a nonstandard import for cloudflare functions
-import publickey from '../../keys/public.txt';
+import * as publickey from '../../keys/public.json';
 
 // ! TEMPORARY ENDPOINT
 // verifies the signature of the result
@@ -18,13 +18,10 @@ export const onRequestPut: PagesFunction<unknown> = async (context) => {
 // sign the result with the private key
 async function verify(result: any, signature: string): Promise<boolean> {
 
-    // parse private key as JWK
-    const jwk = JSON.parse(publickey);
-
     // import the public key
     const key = await crypto.subtle.importKey(
         'jwk',
-        jwk,
+        publickey,
         { name: 'ECDSA', namedCurve: 'P-384' },
         true,
         ['verify']);
