@@ -1,8 +1,13 @@
+// This works for cloudflare functions specifically, and it's a nonstandard import
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import privatekey from '../../../../keys/private';
+
 // "Rolls dice" with the specified number of sides
 // Returns the array of dice rolls plus a digital signature
 // the request count, sides, and request time, and result array are signed with the private key
 // the client can verify the signature with the public key 
-export const onRequest: PagesFunction<unknown> = async (context) => {
+export const onRequestGet: PagesFunction<unknown> = async (context) => {
     const sides: number = parseInt(context.params.sides as string);
     const count: number = parseInt(context.params.count as string);
 
@@ -16,8 +21,8 @@ export const onRequest: PagesFunction<unknown> = async (context) => {
     }
 
     const result = {
-        count: count,
         sides: sides,
+        count: count,
         time: Date.now(),
         rolls: rolls
     }
@@ -31,8 +36,25 @@ export const onRequest: PagesFunction<unknown> = async (context) => {
 
 // sign the result with the private key
 async function sign(result: any): Promise<string> {
-    
-    // TODO: implement signing
 
-    return '';
+    // parse private key as JWK
+    const jwk = JSON.parse(privatekey);
+    console.log(jwk)
+
+    // import the private key
+    const key = await crypto.subtle.importKey(
+        'jwk',
+        jwk,
+        { name: 'ECDSA', namedCurve: 'P-384' },
+        true,
+        ['sign']);
+    
+    // sign the result
+    const signature = await crypto.subtle.sign(
+        { name: 'ECDSA', hash: { name: 'SHA-384' } },
+        key,
+        new TextEncoder().encode(JSON.stringify(result)));
+        
+    // return the signature as a base64 string
+    return btoa(String.fromCharCode(...new Uint8Array(signature)));
 }
