@@ -1,7 +1,5 @@
-// This works for cloudflare functions specifically, and it's a nonstandard import
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import privatekey from '/keys/private';
+// @ts-expect-error - this is a nonstandard import for cloudflare functions
+import privatekey from '../../../../keys/private.json';
 
 // "Rolls dice" with the specified number of sides
 // Returns the array of dice rolls plus a digital signature
