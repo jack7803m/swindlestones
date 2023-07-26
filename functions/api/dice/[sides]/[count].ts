@@ -1,5 +1,5 @@
 // @ts-expect-error - this is a nonstandard import for cloudflare functions
-import privatekey from '../../../../keys/private.json';
+import privatekey from '../../../../keys/private.txt';
 
 // "Rolls dice" with the specified number of sides
 // Returns the array of dice rolls plus a digital signature

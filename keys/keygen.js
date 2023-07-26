@@ -14,9 +14,9 @@ crypto.subtle.generateKey(
     ['sign', 'verify']
 ).then((keyPair) => {
     crypto.subtle.exportKey('jwk', keyPair.privateKey).then((privateKey) => {
-        fs.writeFileSync('./keys/private.json', JSON.stringify(privateKey));
+        fs.writeFileSync('./keys/private.txt', JSON.stringify(privateKey));
     });
     crypto.subtle.exportKey('jwk', keyPair.publicKey).then((publicKey) => {
-        fs.writeFileSync('./keys/public.json', JSON.stringify(publicKey));
+        fs.writeFileSync('./keys/public.txt', JSON.stringify(publicKey));
     });
 });
