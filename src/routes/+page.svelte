@@ -1,13 +1,33 @@
 <!-- YOU CAN DELETE EVERYTHING IN THIS PAGE -->
+<script lang="ts">
+	import { rollDice } from '$lib/dice';
+	import type { DiceRequest } from '$lib/types';
 
-<div class="container h-full mx-auto flex justify-center items-center">
-	<div class="space-y-5">
-		<h1 class="h1">Let's get cracking bones!</h1>
-		<p>Start by exploring:</p>
-		<ul>
-			<li><code class="code">/src/routes/+layout.svelte</code> - barebones layout, the CSS import order is critical!</li>
-			<li><code class="code">/src/app.postcss</code> - minimal css to make the page full screen, may not be relevant for your project</li>
-			<li><code class="code">/src/routes/+page.svelte</code> - this page, you can replace the contents</li>
-		</ul>
+	let dice: Promise<DiceRequest>;
+
+	function roll() {
+		dice = rollDice(5);
+	}
+</script>
+
+<div class="container h-full mx-auto flex justify-center items-center space-x-10">
+	<div class="space-y-5 variant-filled-surface card p-4">
+		<button class="btn variant-filled w-full" on:click={roll}>Roll</button>
+		{#if dice}
+			<p>
+				Result:
+				{#await dice}
+					<p>Rolling...</p>
+				{:then result}
+					{#each result.result.rolls as roll}
+						<p class="chip variant-ghost-primary mx-2">
+							{` ${roll} `}
+						</p>
+					{/each}
+				{:catch error}
+					<p>Error: {error.message}</p>
+				{/await}
+			</p>
+		{/if}
 	</div>
 </div>
