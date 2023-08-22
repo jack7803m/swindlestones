@@ -6,11 +6,10 @@ export async function rollDice(count: number, sides = 4): Promise<DiceRequest> {
         console.error(err);
         return err;
     }).then((res: Response) => {
-        console.log(res);
         if (res.ok) {
             return res.json();
         } else {
-            throw new Error('Network response was not ok?');
+            throw new Error('Dice Roll Error: ' + res.statusText);
         }
     });
 } 

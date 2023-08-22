@@ -1,0 +1,13 @@
+name = "swindlestones_durable_objects"
+main = "./dist/index.mjs"
+compatibility_date = "2023-08-01"
+
+[build]
+command = "npm install && npm run build"
+
+[durable_objects]
+bindings = [{name = "LOBBYMANAGER", class_name = "LobbyManager"}]
+
+[[migrations]]
+tag = "v1" # Should be unique for each entry
+new_classes = ["LobbyManager"]
