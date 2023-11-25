@@ -1,8 +1,7 @@
 <script lang="ts">
 	import type { DiceRequest } from '$lib/types';
 
-	const diceCount = 5;
-
+	export let diceCount: number;
 	export let dice: DiceRequest;
 	let rolls: number[] = [];
 

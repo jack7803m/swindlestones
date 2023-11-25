@@ -5,24 +5,16 @@
 	import type { DiceRequest } from '$lib/types';
 
 	const diceCount = 5;
+	const diceSides = 4;
 
 	let dice: DiceRequest;
-	let rolls: number[] = [];
-
-	$: {
-		if (dice) {
-			rolls = dice.result.rolls;
-		} else {
-			rolls = Array(diceCount).fill(0);
-		}
-	}
 
 	async function roll() {
-		dice = await rollDice(diceCount);
+		dice = await rollDice(diceCount, diceSides);
 	}
 </script>
 
 <div class="space-y-5 variant-filled-surface card p-4">
 	<button class="btn variant-filled w-full" on:click={roll}>Roll</button>
-	<DiceNumbers {dice} />
+	<DiceNumbers {dice} {diceCount} />
 </div>

@@ -1,7 +1,7 @@
 import { verifyServer } from "./crypto";
 import type { DiceRequest } from "./types";
 
-export async function rollDice(count: number, sides = 4): Promise<DiceRequest> {
+export async function rollDice(count: number, sides: number): Promise<DiceRequest> {
 
     return fetch(`api/dice/${sides}/${count}`).catch((err) => {
         console.error(err);
