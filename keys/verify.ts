@@ -1,7 +1,6 @@
-// @ts-expect-error - typescript loves whining
 import * as publickey from './pub.json';
 
-export async function verify(result: unknown, signature: string): Promise<boolean> {
+export async function verifyServer(result: unknown, signature: string): Promise<boolean> {
 
     // import the public key
     const key = await crypto.subtle.importKey(

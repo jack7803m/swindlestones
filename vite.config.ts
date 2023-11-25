@@ -6,6 +6,9 @@ export default defineConfig({
 	server: {
 		proxy: {
 			'/api': 'http://0.0.0.0:8788/'
+		},
+		fs: {
+			allow: ['.']
 		}
 	}
 });

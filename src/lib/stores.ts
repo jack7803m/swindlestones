@@ -1,3 +1,5 @@
-import { writable } from "svelte/store";
+import { readable, type Readable } from "svelte/store";
+import { DurableObjectGame } from "./connection";
+import type { GameConnection } from "./types";
 
-// export const  
+export const gameConnection: Readable<GameConnection> = readable(new DurableObjectGame())

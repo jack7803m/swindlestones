@@ -1,38 +1,41 @@
-# create-svelte
+# Swindlestones
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+_Inspired_ by the simple dice game in Steve Jackson's "Sorcery!"
 
-## Creating a project
+## Description
 
-If you're seeing this, you've probably already done this step. Congrats!
+TODO
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+### Game Rules
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+1. The game starts with an arbitrary amount of players each with an arbitrary (but equal) amount of dice.
 
-## Developing
+1. Each round, players secretly roll their dice.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+1. The first player makes a bid about how many dice of a certain value are on the table.
 
-```bash
-npm run dev
+1. The next player can either challenge the previous bid or make a higher bid.
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+1. If a player challenges, all dice are revealed. If the bid is correct, the challenger loses a die. If the bid is incorrect, the bidder loses a die.
 
-## Building
+1. The game continues until only one player has dice left.
 
-To create a production version of your app:
+## Tests
 
-```bash
-npm run build
-```
+### Client
 
-You can preview the production build with `npm run preview`.
+- cannot see other players' dice
+- cannot modify own dice
+- cannot modify others' dice
+- dice are within valid range
+- cannot bid more dice than in play
+- cannot bid less than 1 dice
+- TODO
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+### Server
+
+- TODO
+
+## License
+
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT). Please see the LICENSE file for more details.

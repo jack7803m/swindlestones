@@ -1,28 +1,36 @@
-import { Peer } from 'peerjs';
-import type { DataConnection } from 'peerjs';
+import type { GameConnection, GameEvent } from './types';
 
-export const host = {
-    connect: async () => {
-        const peer = new Peer();
+export class DurableObjectGame implements GameConnection {
 
-        console.log(peer);
-
-        return new Promise<{ conn: DataConnection, peer: Peer }>((resolve, reject) => {
-            peer.on('connection', (conn) => conn.on('open', () => resolve({ conn, peer })));
-            peer.on('error', reject);
-        });
+    constructor() {
+        console.log('DurableObjectGame constructor');
     }
+    connect(): void {
+        throw new Error('Method not implemented.');
+    }
+    send<T>(clientId: number, data: T): void {
+        throw new Error('Method not implemented.');
+    }
+    broadcast<T>(data: T): void {
+        throw new Error('Method not implemented.');
+    }
+    on<T>(event: GameEvent, callback: (clientId: number, data: T) => void): void {
+        throw new Error('Method not implemented.');
+    }
+
 }
 
-export const client = {
-    connect: async (id: string) => {
-        const peer = new Peer();
-
-        return new Promise<DataConnection>((resolve, reject) => {
-            const conn = peer.connect(id);
-
-            conn.on('open', () => resolve(conn));
-            conn.on('error', reject);
-        });
+export class PeerJSGame implements GameConnection {
+    connect(): void {
+        throw new Error('Method not implemented.');
+    }
+    send<T>(clientId: number, data: T): void {
+        throw new Error('Method not implemented.');
+    }
+    broadcast<T>(data: T): void {
+        throw new Error('Method not implemented.');
+    }
+    on<T>(event: GameEvent, callback: (clientId: number, data: T) => void): void {
+        throw new Error('Method not implemented.');
     }
 }
