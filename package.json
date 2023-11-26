@@ -3,7 +3,7 @@
   "version": "0.0.2",
   "private": true,
   "scripts": {
-    "dev:worker": "node ./keys/keygen.js && wrangler pages dev -- npm run dev",
+    "dev:worker": "node ./keys/keygen.js && wrangler pages dev --do LOBBYMANAGER=LobbyManager@swindlestones_durable_objects -- npm run dev",
     "dev": "vite dev",
     "build": "vite build",
     "preview": "vite preview",

@@ -8,7 +8,9 @@ TODO
 
 ### Game Rules
 
-1. The game starts with an arbitrary amount of players each with an arbitrary (but equal) amount of dice.
+Liar's Dice
+
+1. The game starts with an arbitrary amount of players each with an arbitrary (but equal) amount of 4-sided dice.
 
 1. Each round, players secretly roll their dice.
 

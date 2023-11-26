@@ -1,3 +1,7 @@
+import type { DataConnection } from 'peerjs';
+
+export * from '../../shared/types';
+
 export interface DiceRequest {
     result: {
         sides: number,
@@ -9,26 +13,30 @@ export interface DiceRequest {
 }
 
 export enum GameEvent {
+    RoundStart,
+    NonceHash,
+    NonceSigned,
     TurnStart,
     Bid,
     Challenge,
-}
-
-export interface GameConnection {
-    connect(): void;
-    broadcast<T>(data: T): void;
-    send<T>(clientId: number, data: T): void;
-    on<T>(event: GameEvent, callback: (clientId: number, data: T) => void): void;
+    NonceVerification,
+    NonceDispute
 }
 
 export type Player = {
-    id: number,
+    id: string,
     name: string,
     publicKey: string,
     diceCount: number,
+    connection: DataConnection,
     roundData: RoundData,
 }
 
 export type RoundData = {
     nonceHash: string,
+}
+
+export type GameMessage = {
+    event: GameEvent,
+    details: any
 }

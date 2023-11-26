@@ -3,7 +3,12 @@ import type { DiceRequest } from "./types";
 
 export async function rollDice(count: number, sides: number): Promise<DiceRequest> {
 
-    return fetch(`api/dice/${sides}/${count}`).catch((err) => {
+    return fetch(`api/dice/${sides}/${count}`, {
+        method: 'POST', body: JSON.stringify({
+            nonce: 'nonce',
+            sigs: ['sigs']
+        })
+    }).catch((err) => {
         console.error(err);
         return err;
     }).then(async (res: Response) => {
