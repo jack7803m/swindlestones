@@ -1,14 +1,9 @@
-export function seededRandom(a: number) {
-    let t = a += 0x6D2B79F5;
-    return {
-        gen: () => {
-            t = a += 0x6D2B79F5;
-            t = Math.imul(t ^ t >>> 15, t | 1);
-            t ^= t + Math.imul(t ^ t >>> 7, t | 61);
-            return ((t ^ t >>> 14) >>> 0) / 4294967296;
-        }
-    }
+export const durableObjectRequestURL = 'http://127.0.0.1/api/';
+
+export async function hash(data: unknown): Promise<string> {
+	return hashRaw(data).then((hash) => btoa(String.fromCharCode(...new Uint8Array(hash))));
 }
 
-
-export const durableObjectRequestURL = 'http://127.0.0.1/api/';
+export async function hashRaw(data: unknown): Promise<ArrayBuffer> {
+	return crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(data)));
+}

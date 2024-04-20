@@ -29,11 +29,11 @@
 			return;
 		}
 
-		$gameConnection.send(selectedClient, GameEvent.RoundStart, textToSend);
+		// $gameConnection.send(selectedClient, GameEvent.RoundStart, textToSend);
 	}
 
 	function broadcast() {
-		$gameConnection.broadcast(GameEvent.RoundStart, textToSend);
+		// $gameConnection.broadcast(GameEvent.RoundStart, textToSend);
 	}
 </script>
 
