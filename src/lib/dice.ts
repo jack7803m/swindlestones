@@ -39,7 +39,7 @@ export async function rollDice(count: number, sides: number): Promise<number[]> 
 
 	// Exchange nonce with every other client
 	const nonce = randomResponse.result.nonce;
-	gameConnection.broadcast(GameEvent.NonceExchange, { roundIndex, nonce });
+	gameConnection.broadcast(GameEvent.NonceExchange, { nonce });
 
 	// TODO: Implement nonce exchange, once you have every other client's nonce then continue
 
