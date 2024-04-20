@@ -30,6 +30,8 @@ export async function rollDice(count: number, sides: number): Promise<number[]> 
 
 	// Sanity check: verify the hash
 	if (randomResponse.result.hash !== (await hash(secret))) {
+		console.log(randomResponse.result.hash);
+		console.log(await hash(secret));
 		throw new Error('Failed to verify server response hash');
 	}
 
@@ -37,8 +39,8 @@ export async function rollDice(count: number, sides: number): Promise<number[]> 
 
 	// Exchange nonce with every other client
 	const nonce = randomResponse.result.nonce;
-    gameConnection.broadcast(GameEvent.NonceExchange, { roundIndex, nonce });
-    
+	gameConnection.broadcast(GameEvent.NonceExchange, { roundIndex, nonce });
+
 	// TODO: Implement nonce exchange, once you have every other client's nonce then continue
 
 	// Exchange full response object with every other client
